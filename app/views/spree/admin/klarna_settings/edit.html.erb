@@ -1,0 +1,20 @@
+<%= render 'spree/admin/shared/configuration_menu' %>
+
+<% content_for :page_title do %>
+  <%= Spree.t(:settings, scope: :klarna) %>
+<% end %>
+
+<%= form_tag(admin_klarna_settings_path, method: :put) do %>
+  <fieldset class="no-border-top">
+    <div class="field">
+      <label><%= Spree.t(:active, scope: :klarna) %></label><br>
+      <%= text_field_tag('preferences[active]', Spree::Klarna::Config[:active], size: 3) %>
+    </div>
+
+    <div class="form-buttons filter-actions actions" data-hook="buttons">
+      <%= button Spree.t('actions.update'), 'icon-refresh' %>
+      <span class="or"><%= Spree.t(:or) %></span>
+      <%= link_to_with_icon 'icon-remove', Spree.t('actions.cancel'), edit_admin_general_settings_url, class: 'button' %>
+    </div>
+  </fieldset>
+<% end %>

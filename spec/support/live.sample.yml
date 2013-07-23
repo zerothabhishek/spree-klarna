@@ -1,0 +1,5 @@
+---
+eid: foo
+shared_secret: bar
+# EID, shared secret: Please use the EID and shared secret provided to you by Klarna.
+# This is helpful for development testing it can also be passed in as ENV variable.

@@ -1,0 +1,6 @@
+---
+sv:
+  spree:
+    klarna:
+      checkout: Klarna Checkout
+      settings: Klarna inställningar
