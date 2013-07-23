@@ -1,12 +1,9 @@
 ![Klarna Logo](https://raw.github.com/futhr/spree-klarna/master/klarna.png)
-
-# Klarna
-
 [![Build Status](https://secure.travis-ci.org/futhr/spree-klarna.png?branch=master)](http://travis-ci.org/futhr/spree-klarna)
 [![Dependency Status](https://gemnasium.com/futhr/spree-klarna.png)](https://gemnasium.com/futhr/spree-klarna)
 [![Coverage Status](https://coveralls.io/repos/futhr/spree-klarna/badge.png?branch=master)](https://coveralls.io/r/futhr/spree-klarna)
 
-Klarna Checkout based on [Klarna API 2.0][7]
+*Klarna Checkout based on [Klarna API 2.0][7]*
 
 Contact [Klarna][1] to learn more about their integrated services and what it takes to get them up and running.
 
