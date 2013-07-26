@@ -67,7 +67,7 @@ describe Spree::Klarna::Order do
 
 		    it "uri is product's full-permalink" do
 		    	permalink = "http://demo.spreecommerce.com/product1"
-		    	item_properties[:url].should eq(permalink)
+		    	item_properties[:uri].should eq(permalink)
 		    end
 
 		    it "image_uri is product's first image's url" do
@@ -91,6 +91,7 @@ describe Spree::Klarna::Order do
 		    end
 
 		    it "total_price_excluding_tax is the total price of the line-item" do
+		    	pending "Not needed. Remove"
 		    	item_price_in_cents = item.price * 100
 		    	item_properties[:total_price_excluding_tax].should eq(item_price_in_cents)
 		    end
