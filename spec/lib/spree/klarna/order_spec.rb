@@ -109,8 +109,21 @@ describe Spree::Klarna::Order do
 		    	item_properties[:discount_rate].should eq(discount_rate)
 		    end
 
-		    it "tax_rate" do
-		    	pending "Todo cart-item#tax_rate"
+		    it "tax_rate is 5 when EU_VAT zone tax rate is 5%" do
+		    	rate = 0.05  ## 5%
+		    	tax_rate = create :tax_rate, 
+		    		amount: rate, 
+		    		calculator: create(:default_tax_calculator),
+		    		zone: create(:zone, name: 'EU_VAT')
+		    	item.variant.tax_category = tax_rate.tax_category
+		    	@properties = klarna_order.setup_properties_for_create  # call again as spree_order has changed
+		    	item_properties[:tax_rate].should eq(5)
+		    end
+
+		    it "tax_rate is 0 when tax_category is not set on the item" do
+		      item.variant.tax_category = nil
+		      @properties = klarna_order.setup_properties_for_create
+		      item_properties[:tax_rate].should eq(0)
 		    end
 	  	end
 	  end
