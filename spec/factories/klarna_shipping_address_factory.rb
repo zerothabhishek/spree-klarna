@@ -1,3 +1,4 @@
+# coding: utf-8
 FactoryGirl.define do
   factory :klarna_shipping_address, parent: :shipping_address, class: Spree::KlarnaAddress do
     trait :swedish do
