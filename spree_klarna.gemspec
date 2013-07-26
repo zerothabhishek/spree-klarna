@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.description  = s.summary
   s.required_ruby_version = '>= 1.9.3'
 
-  s.authors      = ['Tobias Bohwalli']
+  s.authors      = ['Tobias Bohwalli', 'Abhishek Yadav']
   s.email        = 'hi@futhr.io'
   s.homepage     = 'https://github.com/futhr/spree-klarna'
   s.license      = %q{BSD-3}
