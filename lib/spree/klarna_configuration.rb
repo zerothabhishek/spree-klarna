@@ -4,6 +4,7 @@ module Spree
     preference :active, :boolean, default: true
     preference :id, :string
     preference :shared_secret, :string
+    preference :eu_zone_name, :string, default: "EU_VAT"
     preference :terms_uri, :string, default: "#{Spree::Config[:site_url]}/terms"
     preference :checkout_uri, :string, default: "#{Spree::Config[:site_url]}/klarna/checkout"
     preference :confirmation_uri, :string, default: "#{Spree::Config[:site_url]}/klarna/confirm"

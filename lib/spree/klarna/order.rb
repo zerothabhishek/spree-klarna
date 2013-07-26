@@ -96,6 +96,10 @@ module Spree
       end
 
       def spree_item_tax_rate(item)
+        tax_category = item.variant.tax_category
+        tax_rate = tax_category.tax_rates.by_zone(spree_zone_id).last if tax_category
+        tax = tax_rate.amount.to_f * 100  if tax_rate
+        tax.to_i
       end
 
       def spree_zone_id
