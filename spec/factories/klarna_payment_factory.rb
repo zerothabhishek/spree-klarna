@@ -1,9 +1,15 @@
 FactoryGirl.define do
   factory :klarna_payment, class: Spree::KlarnaPayment do
     association(:source, factory: :payment)
-    firstname { Faker::Name::first_name }
-    lastname  { Faker::Name::last_name }
-    personal_identity_number { (10000..20000).sample }
+    personal_identity_number { "#{(100000..500000).sample}-9202" }
     invoice_number nil
+
+    trait :swedish do
+      personal_identity_number "410321-9202"
+    end
+
+    trait :finnish do
+      personal_identity_number "190122-829F"
+    end
   end
 end

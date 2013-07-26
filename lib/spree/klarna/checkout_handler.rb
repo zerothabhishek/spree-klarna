@@ -22,10 +22,10 @@ module Spree
       end
 
       def klarna_headers
-        { 
+        {
           "Authentication" => "Klarna #{klarna_auth_digest}",
           "Accept"         => "application/vnd.klarna.checkout.aggregated-order-v2+json",
-          "Content-Type"   => "application/vnd.klarna.checkout.aggregated-order-v2+json"  
+          "Content-Type"   => "application/vnd.klarna.checkout.aggregated-order-v2+json"
         }
       end
 
@@ -37,7 +37,6 @@ module Spree
       def klarna_url
         Rails.env.production? ? @@checkout_url : @@sandbox_url
       end
-
     end
   end
 end

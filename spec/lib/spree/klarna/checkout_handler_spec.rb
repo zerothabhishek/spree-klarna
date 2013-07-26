@@ -8,7 +8,7 @@ describe Spree::Klarna::CheckoutHandler do
   end
 
   before do
-    Spree::Klarna::Config.preferred_shared_secret="abc"
+    Spree::Klarna::Config.preferred_shared_secret = "abc"
   end
 
   context "#post" do  ## uses mocking
@@ -31,11 +31,10 @@ describe Spree::Klarna::CheckoutHandler do
       expected_headers = checkout_handler.klarna_headers
       checkout_handler.headers.should eq(expected_headers)
     end
-
   end
 
   context "#klarna_headers" do
-    before{ checkout_handler.instance_variable_set(:@payload,'sample') }
+    before { checkout_handler.instance_variable_set(:@payload, "sample") }
 
     it "has Authentication as Klarna *" do
       expect(checkout_handler.klarna_headers["Authentication"]).to match(/Klarna .+/)
@@ -51,7 +50,6 @@ describe Spree::Klarna::CheckoutHandler do
   end
 
   context "#klarna_auth_digest" do
-
     it "is 9slzcBLSXEHfNfbV0D2NhJEnlTJv/V1CnOc5d1JsZ8Y=\n for payload: hello" do
       checkout_handler.instance_variable_set(:@payload,'hello')
       checkout_handler.klarna_auth_digest.should eq("9slzcBLSXEHfNfbV0D2NhJEnlTJv/V1CnOc5d1JsZ8Y=\n")
@@ -62,5 +60,4 @@ describe Spree::Klarna::CheckoutHandler do
       checkout_handler.klarna_auth_digest.should eq("IeJursf6cMWO2WljyqQxrL6x4E28PNOBQvTtL5JoPo4=\n")
     end
   end
-
 end

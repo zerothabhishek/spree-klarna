@@ -1,7 +1,6 @@
 module Spree
   module Klarna
     class Order
-
     	attr_reader :id, :properties, :checkout_handler
     	attr_accessor :spree_order
 
@@ -25,7 +24,7 @@ module Spree
     	end
 
     	def setup_properties_for_create
-    		properties = {} #empty_properties
+    		properties = {} # empty_properties
     		properties[:purchase_country]  = @spree_order.bill_address.country  ## Todo: check
     		properties[:purchase_currency] = ""         ## @spree_order.purchase_currency ## Todo: check
     		properties[:locale]   = "sv-ce"             ## Todo: check
@@ -112,7 +111,7 @@ module Spree
     				city: "",
     				country: "",
     				email: "",
-    				phone: ""    				
+    				phone: ""
     			},
     			cart: {
     				total_price_excluding_tax: "",
@@ -152,7 +151,6 @@ module Spree
   				}
     		}
     	end
-
     end
   end
-end 
+end

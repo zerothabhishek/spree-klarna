@@ -1,15 +1,14 @@
 require 'spec_helper'
 
 describe Spree::Klarna::Order do
-
 	before do
     order = create(:order)
-    create(:line_item, 
-    	quantity: 2, 
+    create(:line_item,
+    	quantity: 2,
     	order: order,
-    	variant: create(:base_variant, 
+    	variant: create(:base_variant,
     		price: 10.00,
-    		product: create(:base_product, 
+    		product: create(:base_product,
     			name: "product1",
     			permalink: "product1" )))
     order.line_items.reload
@@ -19,7 +18,7 @@ describe Spree::Klarna::Order do
 	let(:klarna_order) { Spree::Klarna::Order.new }
 
 	context "#create" do
-		it "creates the order on Klarna" do		  
+		it "creates the order on Klarna" do
 		end
 	end
 
@@ -34,25 +33,22 @@ describe Spree::Klarna::Order do
 	end
 
 	describe "#properties for create" do
-	  
 	  before do
   		klarna_order.spree_order = @spree_order
-  		@properties = klarna_order.setup_properties_for_create 	
+  		@properties = klarna_order.setup_properties_for_create
 	  end
 
 	  context ":cart" do
-
 	  	it "contains a item for product1" do
 	  		@properties[:cart][:items][0][:name].should eq("product1")
 	  	end
 
 	  	context "item product1" do
-
-	  		let(:item){ @spree_order.line_items.first }
+	  		let(:item) { @spree_order.line_items.first }
 	  		let(:item_properties) { @properties[:cart][:items][0] }
 
 		    it "type is physical" do
-		    	item_properties[:type].should eq('physical')
+		    	item_properties[:type].should eq("physical")
 		    end
 
 		    it "ean" do
@@ -66,17 +62,17 @@ describe Spree::Klarna::Order do
 		    end
 
 		    it "name is the product's name" do
-		    	item_properties[:name].should eq('product1')
+		    	item_properties[:name].should eq("product1")
 		    end
 
 		    it "uri is product's full-permalink" do
-		    	permalink = "http://demo.spreecommerce.com/product1" 
+		    	permalink = "http://demo.spreecommerce.com/product1"
 		    	item_properties[:url].should eq(permalink)
 		    end
 
 		    it "image_uri is product's first image's url" do
 		    	image = item.variant.images.create
-		    	image.attachment = File.open('spec/support/rails.png')
+		    	image.attachment = File.open("spec/support/rails.png")
 		    	item.save!
 
 		    	@properties = klarna_order.setup_properties_for_create  # call again as spree_order has changed
@@ -108,21 +104,17 @@ describe Spree::Klarna::Order do
 		    end
 
 		    it "discount_rate is discount adjustments as percentage of price" do
-		    	discount_rate = 100 * item.adjustments.sum(&:amount)/item.price 
+		    	discount_rate = 100 * item.adjustments.sum(&:amount)/item.price
 		    	item_properties[:discount_rate].should eq(discount_rate)
 		    end
 
 		    it "tax_rate" do
 		    	pending "Todo cart-item#tax_rate"
 		    end
-
 	  	end
 	  end
 
 	  context ":merchant" do
-	    
 	  end
-
 	end
-  
 end
