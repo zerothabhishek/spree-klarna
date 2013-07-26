@@ -18,7 +18,6 @@ Run
 
     bundle install
     rails g spree_klarna:install
-    rake db:migrate
 
 ## Contributing
 
