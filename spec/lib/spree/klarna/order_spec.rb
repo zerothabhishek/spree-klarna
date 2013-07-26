@@ -38,6 +38,53 @@ describe Spree::Klarna::Order do
   		@properties = klarna_order.setup_properties_for_create
 	  end
 
+  	it ":purchase_currency is same as the Spree::Config[:currency] preference" do
+  		Spree::Config.preferred_currency = 'EUR'
+  		@properties = klarna_order.setup_properties_for_create
+  		@properties[:purchase_currency].should eq('EUR')
+  	end
+
+  	context ":purchase_country" do
+
+  		# copied from : spree_core/db/default/spree/countries.rb
+  		# created only during db:seed rake task
+
+  		let(:sweden){ Spree::Country.create!({"name"=>"Sweden", "iso3"=>"SWE", "iso"=>"SE", "iso_name"=>"SWEDEN", "numcode"=>"752"}, :without_protection => true) }
+  		let(:finland){ Spree::Country.create!({"name"=>"Finland", "iso3"=>"FIN", "iso"=>"FI", "iso_name"=>"FINLAND", "numcode"=>"246"}, :without_protection => true) }
+
+	  	it "is SE when the country in billing address is sweden" do
+	  	  @spree_order.bill_address.country = sweden
+	  	  @properties = klarna_order.setup_properties_for_create
+	  	  @properties[:purchase_country].should eq('SE')
+	  	end
+
+	  	it "is FI when the country in billing address is Finland" do
+	  	  @spree_order.bill_address.country = finland
+	  	  @properties = klarna_order.setup_properties_for_create
+	  	  @properties[:purchase_country].should eq('FI')
+	  	end
+  	end
+
+  	context ":locale" do
+	  	it "is sv-se when the current locale is sv" do
+	  		I18n.locale=:sv
+	  		@properties = klarna_order.setup_properties_for_create
+	  		@properties[:locale].should eq('sv-se')
+	  	end
+
+	  	it "is fi-fi when the current locale is fi" do
+	  		I18n.locale=:fi
+	  		@properties = klarna_order.setup_properties_for_create
+	  		@properties[:locale].should eq('fi-fi')
+	  	end
+
+	  	it "is '' when the current locale is anything other than fi and sv" do
+	  		I18n.locale=:en
+	  		@properties = klarna_order.setup_properties_for_create
+	  		@properties[:locale].should eq('')
+	  	end
+  	end
+
 	  context ":cart" do
 	  	it "contains a item for product1" do
 	  		@properties[:cart][:items][0][:name].should eq("product1")

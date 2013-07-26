@@ -49,7 +49,7 @@ module Spree
         h[:unit_price]    = spree_item_unit_price     item   ## mandatory
         h[:tax_rate]      = spree_item_tax_rate       item   ## mandatory
         h[:type]          = spree_item_type           item   ## optional 
-        h[:ean]           = spree_item_ean            item   ## optional
+        #h[:ean]           = spree_item_ean            item   ## optional
         h[:uri]           = spree_item_uri            item   ## optional
         h[:image_uri]     = spree_item_image_uri      item   ## optional
         h[:discount_rate] = spree_item_discount_rates item   ## optional
@@ -68,15 +68,19 @@ module Spree
     	end
 
       def spree_order_purchase_country
-        #@spree_order.bill_address.country
+        @spree_order.bill_address.country.iso
       end
 
       def spree_order_purchase_currency
-        ""
+        Spree::Config.preferred_currency
       end
 
       def spree_order_locale
-        ""
+        case I18n.locale
+          when :sv;   'sv-se'
+          when :fi;   'fi-fi'
+          else ;      ''
+        end
       end
 
       def spree_item_reference(item)
@@ -111,7 +115,7 @@ module Spree
       end
 
       def spree_item_ean(item)
-        ""  
+        ""  # sku matches best for this, but is being used for reference. This is optional, so leave
       end
 
       def spree_item_uri(item)
