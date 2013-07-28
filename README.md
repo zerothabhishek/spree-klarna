@@ -46,7 +46,7 @@ Starting point:
 * Ensure specs pass by running `bundle exec rspec spec`
 * Submit your pull request
 
-Copyright (c) 2013 Tobias Bohwalli, released under the [New BSD License][4]
+Copyright (c) 2013 [Tobias Bohwalli][8] and [contributors][9], released under the [New BSD License][4]
 
 [1]: http://klarna.se
 [2]: http://www.fsf.org/licensing/essays/free-sw.html
@@ -55,3 +55,5 @@ Copyright (c) 2013 Tobias Bohwalli, released under the [New BSD License][4]
 [5]: http://www.localeapp.com/projects/
 [6]: https://github.com/thoughtbot/guides
 [7]: https://docs.klarna.com/en/getting-started#introduction
+[8]: https://github.com/futhr
+[9]: https://github.com/futhr/spree-klarna/contributors
